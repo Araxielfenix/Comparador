@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Comparador</title>
+    <link rel="stylesheet" href="estilo.css" />
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <!-- Nav with id navBar and the link to https://github.com/araxielfenix on click-->
+    <nav id="navBar" onclick="goProfile()">
+        <img src="https://github.githubassets.com/images/modules/logos_page/Octocat.png" alt="Github" id="githubLogo" />
+        <a href="https://github.com/araxielfenix" id="afGithub">Araxiel Fenix</a>
+    </nav>
+    <br> <br> <br> <br>
+    <section class="parent">
+        <article>
+            <label id="fileLabel1" for="file-upload1" class="custom-file-upload">
+                Subir Log
+            </label>
+            <input id="file-upload1" type="file" onchange="getFileName1()" class="file-upload" />
+        </article>
+        <article>
+            <label id="fileLabel2" for="file-upload2" class="custom-file-upload">
+                Subir complemento
+            </label>
+            <input id="file-upload2" type="file" onchange="getFileName2()" class="file-upload" />
+        </article>
+    </section>
+    <section class="compararItem">
+        <button class="custom-file-upload" onclick="comparacion()">Comparar</button>
+    </section>
+    <br>
+    <section class="compararItem">
+        <!-- Add a empty table named result -->
+        <table id="result" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Tarjeta</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Importe</th>
+                    <th>Num. Autorización</th>
+                    <th>Canal</th>
+                    <th>Num. Operación</th>
+                    <th>Telefono</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+    </section>
+</body>
+
+</html>
