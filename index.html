@@ -30,12 +30,12 @@
         </article>
     </section>
     <section class="compararItem">
-        <button class="custom-file-upload" onclick="comparacion()">Comparar</button>
-        <div id = "loader" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        <button id = "compararButton" class="custom-file-upload" onclick="loading()">Comparar</button>
+        <progress id="progressBar" max="100" value="0"> 0% </progress>
     </section>
     <br>
     <section class="Table">
-        <button class="custom-file-upload" onclick="downloadList()">Descargar lista</button>
+        <button id = "descargarButton" class="custom-file-upload" onclick="downloadList()">Descargar lista</button>
         <table id="result" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
