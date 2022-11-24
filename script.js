@@ -98,12 +98,10 @@ async function addData(data) {
         let dataLength = data.length;
 
         data.map((filas, index) => {
-            //Insert each row in the table.
-            cells[index] = row.insertCell(index);
-            cells[index].innerHTML = data[index];
+            cells[(index % 7)] = row.insertCell(index);
+            cells[(index % 7)].innerHTML = filas[index];
+            
         });
-
-        console.log("Datos agregados");
         document.getElementById("result").style.display = "inline-table";
         resolve();
     });
