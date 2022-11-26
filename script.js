@@ -1,6 +1,6 @@
 // On load page, hide the "result" table.
 window.onload = function () {
-    //document.getElementById("resultados").style.display = "none";
+    document.getElementById("resultados").style.display = "none";
     document.getElementById("loadingAnimation").style.display = "none";
 }
 
@@ -28,10 +28,10 @@ async function getFileName1() {
                 return el != "";
             });
             let fileSplit1Length = fileSplit1.length;
-            for(let i = 0; i < fileSplit1Length; i++){
+            for (let i = 0; i < fileSplit1Length; i++) {
                 archivo[i] = [];
-                for(let j = 0; j < 12; j++){
-                    archivo[i][j] = fileSplit1[i+j];
+                for (let j = 0; j < 12; j++) {
+                    archivo[i][j] = fileSplit1[i + j];
                 }
                 i += 11;
             }
@@ -67,10 +67,10 @@ async function getFileName2() {
                 return el != "";
             });
             let fileSplit2Length = fileSplit2.length;
-            for(let i = 0; i < fileSplit2Length; i++){
+            for (let i = 0; i < fileSplit2Length; i++) {
                 archivo2[i] = [];
-                for(let j = 0; j < 5; j++){
-                    archivo2[i][j] = fileSplit2[i+j];
+                for (let j = 0; j < 5; j++) {
+                    archivo2[i][j] = fileSplit2[i + j];
                 }
                 i += 4;
             }
@@ -84,7 +84,7 @@ async function getFileName2() {
     document.body.style.cursor = "default";
 }
 
-async function loading(){
+async function loading() {
     document.body.style.cursor = "wait";
     document.getElementById("loadingAnimation").style.display = "inline-block";
     document.getElementById("compararButton").innerHTML = "Comparando...";
@@ -105,11 +105,11 @@ async function comparacion() {
             console.log("Comparando...");
             archivo2.map((filas, index) => {
                 archivo.map((filas2, index2) => {
-                    if(archivo2[index][0].includes(archivo[index2][3]) && archivo2[index][3].includes(archivo[index2][4]) &&  archivo2[index][4].includes(archivo[index2][6])){
+                    if (archivo2[index][0].includes(archivo[index2][3]) && archivo2[index][3].includes(archivo[index2][4]) && archivo2[index][4].includes(archivo[index2][6])) {
                         comp[index] = [archivo[index2][0], archivo[index2][4], archivo[index2][5], archivo[index2][6], archivo[index2][8], archivo[index2][10], archivo[index2][9], archivo2[index][2]];
                     }
                 });
-            } );
+            });
         }
         else {
             alert("No se puede completar la comparación, revise los archivos");
@@ -120,7 +120,12 @@ async function comparacion() {
 
 function duplicados() {
     // Use .map to get all rows and filter to get only the ones withoout duplicates.
-    let unique = comp.map(e => e[0]).map((e, i, final) => final.indexOf(e) === i && i).filter(e => comp[e]).map(e => comp[e]);
+    var unique = comp.map(function (e) {
+        return e[0]
+    }).filter(function (e, i, final) {
+        return final.indexOf(e) === i;
+    });
+
     //Download "unique" as CSV file.
     let csvContent = "data:text/csv;charset=utf-8,";
     unique.forEach(function (rowArray) {
@@ -141,8 +146,8 @@ async function addData() {
         let table = document.getElementById("result");
         comp.map((filas, index) => {
             let row = table.insertRow();
-            for(let i = 0; i < 8; i++){
-                let cell= row.insertCell();
+            for (let i = 0; i < 8; i++) {
+                let cell = row.insertCell();
                 cell.innerHTML = comp[index][i];
             }
         });
@@ -154,7 +159,7 @@ async function addData() {
 
 function downloadList() {
     //If checkbock "sinDuplicados is checked, then the list will be filtered."
-    if(document.getElementById("sinDuplicados").checked){
+    if (document.getElementById("sinDuplicados").checked) {
         duplicados();
     } else {
         //Download the table as a CSV file using the "download" attribute.
