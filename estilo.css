@@ -50,6 +50,7 @@ thead{
 #analizador{
   display: none;
   vertical-align: super;
+  text-decoration: none;
 }
 
 /* On hover navBar, show the child named Analizador */
