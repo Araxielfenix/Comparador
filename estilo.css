@@ -99,6 +99,8 @@ article {
 #result{
   border-radius: 4px;
   background-color: #1c1c1c;
+  border-color: ghostwhite;
+  border: outset;
 }
 
 .lds-ring {

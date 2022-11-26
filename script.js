@@ -8,7 +8,11 @@ window.onload = function () {
 var archivo = [];
 var archivo2 = [];
 
-function getFileName1() {
+async function getFileName1() {
+    document.body.style.cursor = "wait";
+    document.getElementById("loadingAnimation").style.display = "inline-block";
+    document.getElementById("compararButton").innerHTML = "Comprobando...";
+    await new Promise(r => setTimeout(r, 1000));
     let fileInput = document.getElementById('file-upload1');
     let filename = fileInput.files[0].name;
     document.getElementById("fileLabel1").innerHTML = filename;
@@ -37,9 +41,16 @@ function getFileName1() {
             alert("No se pudo leer el archivo Log");
         }
     }
+    document.getElementById("compararButton").innerHTML = "Comparar";
+    document.getElementById("loadingAnimation").style.display = "none";
+    document.body.style.cursor = "default";
 }
 
-function getFileName2() {
+async function getFileName2() {
+    document.body.style.cursor = "wait";
+    document.getElementById("loadingAnimation").style.display = "inline-block";
+    document.getElementById("compararButton").innerHTML = "Comprobando...";
+    await new Promise(r => setTimeout(r, 500));
     let fileInput = document.getElementById('file-upload2');
     let filename = fileInput.files[0].name;
     document.getElementById("fileLabel2").innerHTML = filename;
@@ -69,6 +80,9 @@ function getFileName2() {
             alert("No se pudo leer el archivo complemento");
         }
     }
+    document.getElementById("compararButton").innerHTML = "Comparar";
+    document.getElementById("loadingAnimation").style.display = "none";
+    document.body.style.cursor = "default";
 }
 
 async function loading(){
@@ -80,7 +94,6 @@ async function loading(){
     await comparacion();
     console.log("Comparación completada");
     document.getElementById("compararButton").innerHTML = "Validando...";
-    await new Promise(r => setTimeout(r, 1000));
     await addData();
     document.getElementById("compararButton").innerHTML = "Comparar";
     document.getElementById("loadingAnimation").style.display = "none";
@@ -113,16 +126,12 @@ function duplicados() {
 async function addData() {
     return new Promise((resolve, reject) => {
         console.log("Agregando datos a la tabla...");
-        let tableRow = document.getElementById("result");
-        let row = tableRow.insertRow(1);
-        let cells = [];
-        let compLenght = comp.length;
-
+        let table = document.getElementById("result");
         comp.map((filas, index) => {
-            cells[index] = [];
+            let row = table.insertRow();
             for(let i = 0; i < 8; i++){
-                cells[index] = row.insertCell(i);
-                cells[index].innerHTML = comp[index][i];
+                let cell= row.insertCell();
+                cell.innerHTML = comp[index][i];
             }
         });
 
