@@ -11,6 +11,10 @@
   }
 }
 
+/* Mediaquery for mobile */
+@media (min-width:480px) {}
+/* Mediaquery for PC */
+@media (min-width:1281px) {}
 @font-face {
   font-family: "Inter";
   src: url("https://rsms.me/inter/inter-ui-upright.var.woff2") format("woff2-variations");
@@ -23,7 +27,7 @@ thead{
   text-align-last: center;
 }
 
-#navBar {
+.navBar {
   /* Translucid navBar with horizontal gradient blue and purple. */
   background: linear-gradient(to right, #196bca, #6433e0);
   background-color: #196bca;
@@ -38,11 +42,23 @@ thead{
   border-radius: 10px;
   display: inline-block;
 }
-#navBar:hover {
+
+#analizador{
+  display: none;
+  vertical-align: super;
+}
+
+/* On hover navBar, show the child named Analizador */
+section:hover #analizador {
+  display: inline;
+}
+
+.navBar:hover {
   background: linear-gradient(to right, #5482d0, #7d5ee3);
   background-color: #5482d0;
   cursor: pointer;
 }
+
 #githubLogo {
   width: 40px;
   height: 40px;
@@ -52,6 +68,7 @@ thead{
   border-radius: 0px;
   display: inline-block;
 }
+
 #afGithub {
   color: #fff;
   text-decoration: none;
