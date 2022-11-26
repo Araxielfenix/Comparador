@@ -27,6 +27,10 @@ thead{
   text-align-last: center;
 }
 
+.downloadDiv{
+  display:inline;
+}
+
 .navBar {
   /* Translucid navBar with horizontal gradient blue and purple. */
   background: linear-gradient(to right, #196bca, #6433e0);

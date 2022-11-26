@@ -1,8 +1,7 @@
 // On load page, hide the "result" table.
 window.onload = function () {
-    document.getElementById("result").style.display = "none";
+    //document.getElementById("resultados").style.display = "none";
     document.getElementById("loadingAnimation").style.display = "none";
-    document.getElementById("descargarButton").style.display = "none";
 }
 
 var archivo = [];
@@ -120,7 +119,20 @@ async function comparacion() {
 }
 
 function duplicados() {
-
+    // Use .map to get all rows and filter to get only the ones withoout duplicates.
+    let unique = comp.map(e => e[0]).map((e, i, final) => final.indexOf(e) === i && i).filter(e => comp[e]).map(e => comp[e]);
+    //Download "unique" as CSV file.
+    let csvContent = "data:text/csv;charset=utf-8,";
+    unique.forEach(function (rowArray) {
+        let row = rowArray.join(",");
+        csvContent += row + "\r";
+    });
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "duplicados.csv");
+    document.body.appendChild(link);
+    link.click();
 }
 
 async function addData() {
@@ -135,26 +147,30 @@ async function addData() {
             }
         });
 
-        document.getElementById("result").style.display = "inline-table";
-        document.getElementById("descargarButton").style.display = "inline-block";
+        document.getElementById("resultados").style.display = "inline-table";
         resolve();
     });
 }
 
 function downloadList() {
-    //Download the table as a CSV file using the "download" attribute.
-    let csv = 'data:text/csv;charset=utf-8,';
-    let rows = document.querySelectorAll("table tr");
-    for (let i = 0; i < rows.length; i++) {
-        let row = [], cols = rows[i].querySelectorAll("td, th");
-        for (let j = 0; j < cols.length; j++)
-            row.push(cols[j].innerText);
-        csv += row.join(",") + "\r";
+    //If checkbock "sinDuplicados is checked, then the list will be filtered."
+    if(document.getElementById("sinDuplicados").checked){
+        duplicados();
+    } else {
+        //Download the table as a CSV file using the "download" attribute.
+        let csv = 'data:text/csv;charset=utf-8,';
+        let rows = document.querySelectorAll("table tr");
+        for (let i = 0; i < rows.length; i++) {
+            let row = [], cols = rows[i].querySelectorAll("td, th");
+            for (let j = 0; j < cols.length; j++)
+                row.push(cols[j].innerText);
+            csv += row.join(",") + "\r";
+        }
+        let encodedUri = encodeURI(csv);
+        let link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "archivoMatch.csv");
+        document.body.appendChild(link);
+        link.click();
     }
-    let encodedUri = encodeURI(csv);
-    let link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "archivoMatch.csv");
-    document.body.appendChild(link);
-    link.click();
 }
