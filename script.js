@@ -1,12 +1,12 @@
 // On load page, hide the "result" table.
 window.onload = function () {
     document.getElementById("result").style.display = "none";
-    document.getElementById("progressBar").style.display = "none";
+    document.getElementById("loadingAnimation").style.display = "none";
     document.getElementById("descargarButton").style.display = "none";
 }
 
-var fileSplit1 = [];
-var fileSplit2 = [];
+var archivo = [];
+var archivo2 = [];
 
 function getFileName1() {
     let fileInput = document.getElementById('file-upload1');
@@ -17,10 +17,21 @@ function getFileName1() {
         let reader = new FileReader();
         reader.readAsText(file1, "UTF-8");
         reader.onload = function (evt) {
-            fileSplit1 = evt.target.result.split("\t");
+            let fileSplit1 = evt.target.result.split("\t");
             fileSplit1 = fileSplit1.toString().split("\r");
             fileSplit1 = fileSplit1.toString().split("\n");
             fileSplit1 = fileSplit1.toString().split(",");
+            fileSplit1 = fileSplit1.filter(function (el) {
+                return el != "";
+            });
+            let fileSplit1Length = fileSplit1.length;
+            for(let i = 0; i < fileSplit1Length; i++){
+                archivo[i] = [];
+                for(let j = 0; j < 12; j++){
+                    archivo[i][j] = fileSplit1[i+j];
+                }
+                i += 11;
+            }
         }
         reader.onerror = function (evt) {
             alert("No se pudo leer el archivo Log");
@@ -37,10 +48,22 @@ function getFileName2() {
         let reader = new FileReader();
         reader.readAsText(file2, "UTF-8");
         reader.onload = function (evt2) {
-            fileSplit2 = evt2.target.result.split("\t");
+            let fileSplit2 = evt2.target.result.split("\t");
             fileSplit2 = fileSplit2.toString().split("\r");
             fileSplit2 = fileSplit2.toString().split("\n");
             fileSplit2 = fileSplit2.toString().split(",");
+            //.pop every 13 elements.
+            fileSplit2 = fileSplit2.filter(function (el) {
+                return el != "";
+            });
+            let fileSplit2Length = fileSplit2.length;
+            for(let i = 0; i < fileSplit2Length; i++){
+                archivo2[i] = [];
+                for(let j = 0; j < 5; j++){
+                    archivo2[i][j] = fileSplit2[i+j];
+                }
+                i += 4;
+            }
         }
         reader.onerror = function (evt2) {
             alert("No se pudo leer el archivo complemento");
@@ -50,33 +73,31 @@ function getFileName2() {
 
 async function loading(){
     document.body.style.cursor = "wait";
-    document.getElementById("progressBar").style.display = "block";
+    document.getElementById("loadingAnimation").style.display = "inline-block";
     document.getElementById("compararButton").innerHTML = "Comparando...";
+    //Espera 5 segundos antes de ejecutar la funcion comparacion para que se vea el progreso de la barra.
+    await new Promise(r => setTimeout(r, 1000));
     await comparacion();
     console.log("Comparación completada");
+    document.getElementById("compararButton").innerHTML = "Validando...";
+    await new Promise(r => setTimeout(r, 1000));
+    await addData();
     document.getElementById("compararButton").innerHTML = "Comparar";
-    document.getElementById("progressBar").style.display = "none";
+    document.getElementById("loadingAnimation").style.display = "none";
     document.body.style.cursor = "default";
 }
-
+var comp = [];
 async function comparacion() {
     return new Promise(async (resolve, reject) => {
-        if (fileSplit1 && fileSplit2) {
-            let fileSplit1Length = fileSplit1.length;
+        if (archivo && archivo2) {
             console.log("Comparando...");
-            let comp = [];
-            fileSplit1.map((row, index) =>{
-                if(fileSplit2.includes(row)){
-                    comp.push(fileSplit1[0], fileSplit1[4], fileSplit1[11], fileSplit1[6], fileSplit1[5], fileSplit1[10], fileSplit1[3], fileSplit2[index * 2]);
-                }
-            });
-            //remove undefined values from array.
-            comp = comp.filter(function (el) {
-                return el != null;
-            });
-            //add the data to the table.
-            await addData(comp);
-            document.getElementById("descargarButton").style.display = "block";
+            archivo2.map((filas, index) => {
+                archivo.map((filas2, index2) => {
+                    if(archivo2[index][0].includes(archivo[index2][3]) && archivo2[index][3].includes(archivo[index2][4]) &&  archivo2[index][4].includes(archivo[index2][6])){
+                        comp[index] = [archivo[index2][0], archivo[index2][4], archivo[index2][5], archivo[index2][6], archivo[index2][8], archivo[index2][10], archivo[index2][9], archivo2[index][2]];
+                    }
+                });
+            } );
         }
         else {
             alert("No se puede completar la comparación, revise los archivos");
@@ -89,20 +110,24 @@ function duplicados() {
 
 }
 
-async function addData(data) {
+async function addData() {
     return new Promise((resolve, reject) => {
         console.log("Agregando datos a la tabla...");
         let tableRow = document.getElementById("result");
         let row = tableRow.insertRow(1);
         let cells = [];
-        let dataLength = data.length;
+        let compLenght = comp.length;
 
-        data.map((filas, index) => {
-            cells[(index % 7)] = row.insertCell(index);
-            cells[(index % 7)].innerHTML = filas[index];
-            
+        comp.map((filas, index) => {
+            cells[index] = [];
+            for(let i = 0; i < 8; i++){
+                cells[index] = row.insertCell(i);
+                cells[index].innerHTML = comp[index][i];
+            }
         });
+
         document.getElementById("result").style.display = "inline-table";
+        document.getElementById("descargarButton").style.display = "inline-block";
         resolve();
     });
 }
