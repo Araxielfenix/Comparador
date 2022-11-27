@@ -1,20 +1,130 @@
 @media (prefers-color-scheme: dark) {
-  body {
-    background-color: #000;
+  html {
+    background-color: #000000;
+    opacity: 0.9;
+    background-image: radial-gradient(#1f1f1f 0.9px, #000000 0.9px);
+    background-size: 18px 18px;
+  }
+  .navBar {
+    border-radius: 3px;
+    background-color: ghostwhite;
+    opacity: 50%;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  a{
+    color: black;
+  }
+  a:hover ,.flex-item:nth-child(1):hover, .flex-item:nth-child(2):hover {
+    background-color: black;
+    color: ghostwhite;
+    cursor: pointer;
+  }
+  .custom-file-upload {
+    background-color: #1f1f1f;
     color: #fff;
+  }
+  .custom-file-upload:hover {
+    background-color: ghostwhite;
+    color: black;
+    opacity: 50%;
   }
 }
 @media (prefers-color-scheme: light) {
-  body {
+  html {
+    background-color: #f8f8ff;
+    opacity: 0.9;
+    background-image: radial-gradient(
+      #1f1f1f 0.8500000000000001px,
+      #f8f8ff 0.8500000000000001px
+    );
+    background-size: 17px 17px;
+    color: #000000;
+  }
+
+  .navBar {
+    border-radius: 3px;
+    background-color: #1f1f1f;
+    opacity: 90%;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  }
+  a{
+    color: ghostwhite;
+  }
+  a:hover, .navItem:hover, .flex-item:nth-child(1):hover, .flex-item:nth-child(2):hover {
     background-color: ghostwhite;
-    color: #000;
+    color: #000000;
+    cursor: pointer;
+  }
+  .custom-file-upload {
+    background-color: #1f1f1f;
+    color: #fff;
+    opacity: 80%;
+  }
+  .custom-file-upload:hover {
+    background-color: black;
+    color: ghostwhite;
+    opacity: 50%;
   }
 }
 
 /* Mediaquery for mobile */
-@media (min-width:480px) {}
+@media (min-width: 480px) {
+  .flex-item:nth-child(1) {
+      font-size: 50px;
+      padding-inline: 10px;
+    }
+    .flex-item:nth-child(2) {
+      font-size: 40px;
+      padding-inline: 10px;
+      
+    }
+    .flex-item:nth-child(1):hover {
+      padding-inline: 10px;
+    }
+    .flex-item:nth-child(2):hover {
+      padding-inline: 10px;
+      padding-block: 12px;
+    }
+    #loadingAnimation{
+      margin: auto auto;
+      position: absolute;
+      top: 10;
+      left: 0;
+      right: 0;
+    }
+    
+}
 /* Mediaquery for PC */
-@media (min-width:1281px) {}
+@media (min-width: 1281px) {
+    .flex-item:nth-child(1) {
+      font-size: 40px;
+      padding-inline: 10px;
+    }
+    .flex-item:nth-child(2) {
+      font-size: 20px;
+      padding-inline: 10px;
+    }
+    .flex-item:nth-child(1):hover {
+      padding-inline: 10px;
+    }
+    .flex-item:nth-child(2):hover {
+      padding-inline: 10px;
+      padding-block: 12px;
+    }
+    #loadingAnimation{
+      margin: auto auto;
+      position: absolute;
+      top: 10;
+      left: 0;
+      right: 0;
+    }
+}
+
+a{
+  text-decoration: none;
+}
+
 @font-face {
   font-family: "Inter";
   src: url("https://rsms.me/inter/inter-ui-upright.var.woff2") format("woff2-variations");
@@ -29,56 +139,6 @@ thead{
 
 .downloadDiv{
   display:inline;
-}
-
-.navBar {
-  /* Translucid navBar with horizontal gradient blue and purple. */
-  background: linear-gradient(to right, #196bca, #6433e0);
-  background-color: #196bca;
-  color: #fff;
-  font-family: Lucida Console;
-  font-size: 18px;
-  font-weight: 800;
-  font-style: normal;
-  text-decoration: none;
-  padding: 14px 15px;
-  border: 0px solid #000;
-  border-radius: 10px;
-  display: inline-block;
-}
-
-#analizador{
-  display: none;
-  vertical-align: super;
-  text-decoration: none;
-}
-
-/* On hover navBar, show the child named Analizador */
-section:hover #analizador {
-  display: inline;
-}
-
-.navBar:hover {
-  background: linear-gradient(to right, #5482d0, #7d5ee3);
-  background-color: #5482d0;
-  cursor: pointer;
-}
-
-#githubLogo {
-  width: 40px;
-  height: 40px;
-  margin: 0px 0px -4px 0px;
-  padding: 0px 0px 0px 0px;
-  border: 0px solid #000;
-  border-radius: 0px;
-  display: inline-block;
-}
-
-#afGithub {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.5rem;
-  vertical-align: super;
 }
 
 .parent {
@@ -99,58 +159,27 @@ article {
 
 .custom-file-upload {
   /* Set background with vertical gradient from blue to purple */
-  background: linear-gradient(to right, #196bca, #6433e0);
-  background-color: #196bca;
   border-radius: 5px;
-  border: 1px solid #ccc;
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
   color: white;
   font-family: Lucida Console bold;
   font-weight: bold;
+  font-size: 20px;
 }
-.custom-file-upload:hover {
-  background: linear-gradient(to right, #5482d0, #7d5ee3);
-  background-color: #5482d0;
-  cursor: pointer;
-}
+
 .compararItem {
   text-align-last: center;
 }
+
 #result{
   border-radius: 4px;
-  background-color: #1c1c1c;
+  background-color: #1f1f1f;
   border-color: ghostwhite;
   border: outset;
-}
-
-.lds-ring {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border: 8px solid #0b1de3;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #0032f3 transparent transparent transparent;
-}
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
-}
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
-}
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
+  color: ghostwhite;
+  opacity: 90%;
 }
 
 @keyframes ldio-l8s7xgy80tp {
@@ -166,19 +195,19 @@ article {
   animation: ldio-l8s7xgy80tp 1s cubic-bezier(0.5,0,0.5,1) infinite;
 }.ldio-l8s7xgy80tp div:nth-child(1) {
   transform: translate(30px,0);
-  background: #0051a2;
+  background: #141414;
   animation-delay: -0.6s;
 }.ldio-l8s7xgy80tp div:nth-child(2) {
   transform: translate(70px,0);
-  background: #1b75be;
+  background: #3f3f3f;
   animation-delay: -0.4s;
 }.ldio-l8s7xgy80tp div:nth-child(3) {
   transform: translate(110px,0);
-  background: #408ee0;
+  background: #818181;
   animation-delay: -0.2s;
 }.ldio-l8s7xgy80tp div:nth-child(4) {
   transform: translate(150px,0);
-  background: #89bff8;
+  background: #acadad;
   animation-delay: -1s;
 }
 .loadingio-spinner-bars-2bsd7697baf {
@@ -199,4 +228,80 @@ article {
   transform-origin: 0 0; /* see note above */
 }
 .ldio-l8s7xgy80tp div { box-sizing: content-box; }
-/* generated by https://loading.io/ */
+
+.flex-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -webkit-box-align: start;
+  -moz-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.flex-item:nth-child(1) {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  -webkit-box-ordinal-group: 1;
+  -moz-box-ordinal-group: 1;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.flex-item:nth-child(2) {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  -webkit-box-ordinal-group: 1;
+  -moz-box-ordinal-group: 1;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+/*
+    Legacy Firefox implementation treats all flex containers
+    as inline-block elements.
+*/
+
+@-moz-document url-prefix() {
+  .flex-container {
+    width: 100%;
+    -moz-box-sizing: border-box;
+  }
+}

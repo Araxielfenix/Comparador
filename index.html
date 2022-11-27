@@ -9,13 +9,19 @@
 </head>
 
 <body>
-    <!-- Nav with id navBar and the link to https://github.com/araxielfenix on click-->
-    <nav onclick="goProfile()">
-        <section class = "navBar">
-            <img src="https://github.githubassets.com/images/modules/logos_page/Octocat.png" alt="Github" id="githubLogo" />
-            <a href="https://github.com/araxielfenix" id="afGithub">Araxiel Fenix</a>
-            <a href="https://araxielfenix.github.io/Analizador/#" class="custom-file-upload" id="analizador">Analizador</a>
-        </section>
+    <nav class = "navBar">
+        <div class = "flex-container flex-container-style fixed-height">
+            <div class="flex-item">
+                <a href="https://github.com/araxielfenix">
+                    <label class = "navItem"> ARAXIEL FENIX </label>
+                </a>
+            </div>
+            <div class="flex-item">
+                <a href="https://araxielfenix.github.io/Analizador/#">
+                    <label class = "navItem"> Analisador de mensajes ISO </label>
+                </a>
+            </div>
+        </div>
     </nav>
 
     <br> <br> <br> <br>
@@ -35,15 +41,13 @@
     </section>
     <section class="compararItem">
         <button id="compararButton" class="custom-file-upload" onclick="loading()">Comparar</button>
+    </section>
+    <section>
         <div id = "loadingAnimation" class="loadingio-spinner-bars-2bsd7697baf"><div class="ldio-l8s7xgy80tp"><div></div><div></div><div></div><div></div></div></div>
     </section>
     <br>
     <section id = "resultados" class="Table">
         <button id="descargarButton" class="custom-file-upload" onclick="downloadList()">Descargar lista</button>
-        <div class="downloadDiv">
-            <input type="checkbox" id="sinDuplicados" name="sinDuplicados" value="Sin duplicados">
-            <label for="sinDuplicados">Sin duplicados</label>
-        </div>
         <br> <br>
         <table id="result" class="table table-striped table-bordered" style="width:100%">
             <thead>

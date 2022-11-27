@@ -1,6 +1,5 @@
 // On load page, hide the "result" table.
 window.onload = function () {
-    document.getElementById("resultados").style.display = "none";
     document.getElementById("loadingAnimation").style.display = "none";
 }
 
@@ -152,16 +151,16 @@ async function addData() {
             }
         });
 
-        document.getElementById("resultados").style.display = "inline-table";
+        document.getElementById("resultados").style.display = "inline";
         resolve();
     });
 }
 
 function downloadList() {
-    //If checkbock "sinDuplicados is checked, then the list will be filtered."
-    if (document.getElementById("sinDuplicados").checked) {
-        duplicados();
-    } else {
+    if (comp.length == 0) {
+        alert("No hay datos para descargar");
+    }
+    else{
         //Download the table as a CSV file using the "download" attribute.
         let csv = 'data:text/csv;charset=utf-8,';
         let rows = document.querySelectorAll("table tr");
