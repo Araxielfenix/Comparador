@@ -162,7 +162,7 @@ function downloadList() {
     }
     else{
         //Download the table as a CSV file using the "download" attribute.
-        let csv = 'data:text/csv;charset=utf-8,';
+        let csv = 'data:text/csv';
         let rows = document.querySelectorAll("table tr");
         for (let i = 0; i < rows.length; i++) {
             let row = [], cols = rows[i].querySelectorAll("td, th");
@@ -173,7 +173,7 @@ function downloadList() {
         let encodedUri = encodeURI(csv);
         let link = document.createElement("a");
         link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "archivoMatch.csv");
+        link.setAttribute("download", "revAtt.csv");
         document.body.appendChild(link);
         link.click();
     }
