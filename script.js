@@ -161,8 +161,8 @@ function downloadList() {
         alert("No hay datos para descargar");
     }
     else{
-        //Download the table as a CSV file using the "download" attribute.
-        let csv = 'data:text/csv';
+        //Download the table as text and convert it to CSV.
+        let csv = 'data:text/csv;charset=utf-32,';
         let rows = document.querySelectorAll("table tr");
         for (let i = 0; i < rows.length; i++) {
             let row = [], cols = rows[i].querySelectorAll("td, th");
@@ -173,7 +173,11 @@ function downloadList() {
         let encodedUri = encodeURI(csv);
         let link = document.createElement("a");
         link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "revAtt.csv");
+        // Get the last 2 characters of the actual year.
+        let year = new Date().getFullYear().toString().substr(-2);
+        //Get the month in 2 digits.
+        let month = ("0" + (new Date().getMonth() + 1)).slice(-2);
+        link.setAttribute("download", "revAtt" + year + month + ".txt");
         document.body.appendChild(link);
         link.click();
     }
