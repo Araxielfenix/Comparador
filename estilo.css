@@ -131,10 +131,6 @@ a{
   font-stretch: 25% 151%;
 }
 
-thead{
-  text-align-last: center;
-}
-
 .downloadDiv{
   display:inline;
 }
@@ -173,11 +169,19 @@ article {
 
 #result{
   border-radius: 4px;
-  background-color: #1f1f1f;
-  border-color: ghostwhite;
-  border: outset;
+  border-style: solid;
   color: ghostwhite;
+  background-color: #1f1f1f;
   opacity: 90%;
+  text-align-last: center;
+}
+
+thead{
+  text-align-last: center;
+}
+
+tbody{
+  background-color: #333;
 }
 
 @keyframes ldio-l8s7xgy80tp {

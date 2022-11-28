@@ -142,7 +142,7 @@ function duplicados() {
 async function addData() {
     return new Promise((resolve, reject) => {
         console.log("Agregando datos a la tabla...");
-        let table = document.getElementById("result");
+        let table = document.getElementById("tableBody");
         comp.map((filas, index) => {
             let row = table.insertRow();
             for (let i = 0; i < 8; i++) {
