@@ -6,6 +6,10 @@ window.onload = function () {
 var archivo = [];
 var archivo2 = [];
 
+/**
+ * It reads the file, splits it into an array, and then splits that array into a multidimensional array
+ * @returns the name of the file that was uploaded.
+ */
 async function getFileName1() {
     document.body.style.cursor = "wait";
     document.getElementById("loadingAnimation").style.display = "inline-block";
@@ -44,6 +48,11 @@ async function getFileName1() {
     document.body.style.cursor = "default";
 }
 
+/**
+ * It reads the file, splits it into an array, and then splits that array into a multidimensional
+ * array.
+ * @returns The file name.
+ */
 async function getFileName2() {
     document.body.style.cursor = "wait";
     document.getElementById("loadingAnimation").style.display = "inline-block";
@@ -83,12 +92,18 @@ async function getFileName2() {
     document.body.style.cursor = "default";
 }
 
+/**
+ * It changes the cursor to a loading icon, changes the button text to "Comparando...", waits for 1
+ * second, runs the comparacion() function, changes the button text to "Validando...", runs the
+ * addData() function, changes the button text to "Comparar", hides the loading animation, and changes
+ * the cursor back to the default
+ */
 async function loading() {
     document.body.style.cursor = "wait";
     document.getElementById("loadingAnimation").style.display = "inline-block";
     document.getElementById("compararButton").innerHTML = "Comparando...";
     //Espera 5 segundos antes de ejecutar la funcion comparacion para que se vea el progreso de la barra.
-    await new Promise(r => setTimeout(r, 1000));
+    //await new Promise(r => setTimeout(r, 500));
     await comparacion();
     console.log("Comparación completada");
     document.getElementById("compararButton").innerHTML = "Validando...";
@@ -98,6 +113,10 @@ async function loading() {
     document.body.style.cursor = "default";
 }
 var comp = [];
+/**
+ * It compares two arrays and returns a new array with the values that match
+ * @returns a promise.
+ */
 async function comparacion() {
     return new Promise(async (resolve, reject) => {
         if (archivo && archivo2) {
@@ -109,6 +128,8 @@ async function comparacion() {
                     }
                 });
             });
+            archivo = [];
+            archivo2 = [];
         }
         else {
             alert("No se puede completar la comparación, revise los archivos");
@@ -117,28 +138,10 @@ async function comparacion() {
     });
 }
 
-function duplicados() {
-    // Use .map to get all rows and filter to get only the ones withoout duplicates.
-    var unique = comp.map(function (e) {
-        return e[0]
-    }).filter(function (e, i, final) {
-        return final.indexOf(e) === i;
-    });
-
-    //Download "unique" as CSV file.
-    let csvContent = "data:text/csv;charset=utf-8,";
-    unique.forEach(function (rowArray) {
-        let row = rowArray.join(",");
-        csvContent += row + "\r";
-    });
-    var encodedUri = encodeURI(csvContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "duplicados.csv");
-    document.body.appendChild(link);
-    link.click();
-}
-
+/**
+ * It creates a table and adds the data to it
+ * @returns A promise that will resolve when the table is filled with the data.
+ */
 async function addData() {
     return new Promise((resolve, reject) => {
         console.log("Agregando datos a la tabla...");
@@ -150,14 +153,19 @@ async function addData() {
                 cell.innerHTML = comp[index][index2];
             });
         });
-
         document.getElementById("resultados").style.display = "inline";
+        comp = [];
         resolve();
     });
 }
 
+/**
+ * It downloads a table as a CSV file
+ */
 function downloadList() {
-    if (comp.length == 0) {
+    let table = document.getElementById("tableBody");
+    let tableLength = table.rows.length;
+    if (tableLength == 0) {
         alert("No hay datos para descargar");
     }
     else{
