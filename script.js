@@ -145,10 +145,10 @@ async function addData() {
         let table = document.getElementById("tableBody");
         comp.map((filas, index) => {
             let row = table.insertRow();
-            for (let i = 0; i < 8; i++) {
+            filas.map((columnas, index2) => {
                 let cell = row.insertCell();
-                cell.innerHTML = comp[index][i];
-            }
+                cell.innerHTML = comp[index][index2];
+            });
         });
 
         document.getElementById("resultados").style.display = "inline";
@@ -162,7 +162,7 @@ function downloadList() {
     }
     else{
         //Download the table as text and convert it to CSV.
-        let csv = 'data:text/csv;charset=utf-32,';
+        let csv = 'data:text/csv;charset=unicode,';
         let rows = document.querySelectorAll("table tr");
         for (let i = 0; i < rows.length; i++) {
             let row = [], cols = rows[i].querySelectorAll("td, th");
