@@ -11,7 +11,7 @@ var archivo2 = [];
  * @returns the name of the file that was uploaded.
  */
 async function getFileName1() {
-    document.body.style.cursor = "wait";
+    document.body.style.cursor = "progress";
     document.getElementById("loadingAnimation").style.display = "inline-block";
     document.getElementById("compararButton").innerHTML = "Comprobando...";
     await new Promise(r => setTimeout(r, 1000));
@@ -54,7 +54,7 @@ async function getFileName1() {
  * @returns The file name.
  */
 async function getFileName2() {
-    document.body.style.cursor = "wait";
+    document.body.style.cursor = "progress";
     document.getElementById("loadingAnimation").style.display = "inline-block";
     document.getElementById("compararButton").innerHTML = "Comprobando...";
     await new Promise(r => setTimeout(r, 500));
@@ -99,11 +99,11 @@ async function getFileName2() {
  * the cursor back to the default
  */
 async function loading() {
-    document.body.style.cursor = "wait";
+    document.body.style.cursor = "progress";
     document.getElementById("loadingAnimation").style.display = "inline-block";
     document.getElementById("compararButton").innerHTML = "Comparando...";
     //Espera 5 segundos antes de ejecutar la funcion comparacion para que se vea el progreso de la barra.
-    //await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 250));
     await comparacion();
     console.log("Comparación completada");
     document.getElementById("compararButton").innerHTML = "Validando...";
@@ -124,16 +124,16 @@ async function comparacion() {
             archivo2.map((filas, index) => {
                 archivo.map((filas2, index2) => {
                     if (archivo2[index][0].includes(archivo[index2][3]) && archivo2[index][3].includes(archivo[index2][4]) && archivo2[index][4].includes(archivo[index2][6])) {
-                        comp[index] = [archivo[index2][0], archivo[index2][4], archivo[index2][5], archivo[index2][6], archivo[index2][8], archivo[index2][10], archivo[index2][9], archivo2[index][2]];
+                        comp[index] = [archivo[index2][0], archivo[index2][4], archivo[index2][5], archivo[index2][6], archivo2[index][1], archivo[index2][10], archivo[index2][9], archivo2[index][2]];
                     }
                 });
             });
-            archivo = [];
-            archivo2 = [];
         }
         else {
             alert("No se puede completar la comparación, revise los archivos");
         }
+        archivo = [];
+        archivo2 = [];
         resolve();
     });
 }
