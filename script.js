@@ -14,7 +14,7 @@ async function getFileName1() {
     document.body.style.cursor = "progress";
     document.getElementById("loadingAnimation").style.display = "inline-block";
     document.getElementById("compararButton").innerHTML = "Comprobando...";
-    await new Promise(r => setTimeout(r, 1000));
+    await new Promise(r => setTimeout(r, 200));
     let fileInput = document.getElementById('file-upload1');
     let filename = fileInput.files[0].name;
     document.getElementById("fileLabel1").innerHTML = filename;
@@ -57,7 +57,7 @@ async function getFileName2() {
     document.body.style.cursor = "progress";
     document.getElementById("loadingAnimation").style.display = "inline-block";
     document.getElementById("compararButton").innerHTML = "Comprobando...";
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 200));
     let fileInput = document.getElementById('file-upload2');
     let filename = fileInput.files[0].name;
     document.getElementById("fileLabel2").innerHTML = filename;
@@ -70,7 +70,6 @@ async function getFileName2() {
             fileSplit2 = fileSplit2.toString().split("\r");
             fileSplit2 = fileSplit2.toString().split("\n");
             fileSplit2 = fileSplit2.toString().split(",");
-            //.pop every 13 elements.
             fileSplit2 = fileSplit2.filter(function (el) {
                 return el != "";
             });
@@ -119,6 +118,8 @@ var comp = [];
  */
 async function comparacion() {
     return new Promise(async (resolve, reject) => {
+        archivoLength = archivo.length;
+        archivo2Length = archivo2.length;
         if (archivo && archivo2) {
             console.log("Comparando...");
             archivo2.map((filas, index) => {
@@ -146,15 +147,16 @@ async function addData() {
     return new Promise((resolve, reject) => {
         console.log("Agregando datos a la tabla...");
         let table = document.getElementById("tableBody");
+        let compLenght = comp.length;
         comp.map((filas, index) => {
             let row = table.insertRow();
-            filas.map((columnas, index2) => {
+            for (let i = 0; i < 8; i++) {
                 let cell = row.insertCell();
-                cell.innerHTML = comp[index][index2];
-            });
+                cell.innerHTML = comp[index][i];
+            }
         });
-        document.getElementById("resultados").style.display = "inline";
         comp = [];
+        document.getElementById("resultados").style.display = "inline";
         resolve();
     });
 }
@@ -184,7 +186,7 @@ function downloadList() {
         // Get the last 2 characters of the actual year.
         let year = new Date().getFullYear().toString().substr(-2);
         //Get the month in 2 digits.
-        let month = ("0" + (new Date().getMonth() + 1)).slice(-2);
+        let month = ("0" + (new Date().getMonth() + 1)).slice(-2) - 1;
         link.setAttribute("download", "revAtt" + year + month + ".txt");
         document.body.appendChild(link);
         link.click();
