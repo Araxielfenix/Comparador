@@ -11,10 +11,10 @@ var archivo2 = [];
  * @returns the name of the file that was uploaded.
  */
 async function getFileName1() {
-    document.body.style.cursor = "wait";
+    document.body.style.cursor = "progress";
     document.getElementById("loadingAnimation").style.display = "inline-block";
     document.getElementById("compararButton").innerHTML = "Comprobando...";
-    await new Promise(r => setTimeout(r, 1000));
+    await new Promise(r => setTimeout(r, 200));
     let fileInput = document.getElementById('file-upload1');
     let filename = fileInput.files[0].name;
     document.getElementById("fileLabel1").innerHTML = filename;
@@ -54,10 +54,10 @@ async function getFileName1() {
  * @returns The file name.
  */
 async function getFileName2() {
-    document.body.style.cursor = "wait";
+    document.body.style.cursor = "progress";
     document.getElementById("loadingAnimation").style.display = "inline-block";
     document.getElementById("compararButton").innerHTML = "Comprobando...";
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 200));
     let fileInput = document.getElementById('file-upload2');
     let filename = fileInput.files[0].name;
     document.getElementById("fileLabel2").innerHTML = filename;
@@ -70,7 +70,6 @@ async function getFileName2() {
             fileSplit2 = fileSplit2.toString().split("\r");
             fileSplit2 = fileSplit2.toString().split("\n");
             fileSplit2 = fileSplit2.toString().split(",");
-            //.pop every 13 elements.
             fileSplit2 = fileSplit2.filter(function (el) {
                 return el != "";
             });
@@ -99,11 +98,11 @@ async function getFileName2() {
  * the cursor back to the default
  */
 async function loading() {
-    document.body.style.cursor = "wait";
+    document.body.style.cursor = "progress";
     document.getElementById("loadingAnimation").style.display = "inline-block";
     document.getElementById("compararButton").innerHTML = "Comparando...";
     //Espera 5 segundos antes de ejecutar la funcion comparacion para que se vea el progreso de la barra.
-    //await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 250));
     await comparacion();
     console.log("Comparación completada");
     document.getElementById("compararButton").innerHTML = "Validando...";
@@ -112,6 +111,16 @@ async function loading() {
     document.getElementById("loadingAnimation").style.display = "none";
     document.body.style.cursor = "default";
 }
+
+/**
+ * It filters out the duplicates and empty strings from the array
+ * @param array - The array to be filtered.
+ * @returns the unique elements of the array.
+ */
+function removeDuplicatesAndEmpty(array) {
+    return array.filter((item, index) => array.indexOf(item) === index);
+}
+  
 var comp = [];
 /**
  * It compares two arrays and returns a new array with the values that match
@@ -119,21 +128,24 @@ var comp = [];
  */
 async function comparacion() {
     return new Promise(async (resolve, reject) => {
+        archivoLength = archivo.length;
+        archivo2Length = archivo2.length;
         if (archivo && archivo2) {
             console.log("Comparando...");
             archivo2.map((filas, index) => {
                 archivo.map((filas2, index2) => {
                     if (archivo2[index][0].includes(archivo[index2][3]) && archivo2[index][3].includes(archivo[index2][4]) && archivo2[index][4].includes(archivo[index2][6])) {
-                        comp[index] = [archivo[index2][0], archivo[index2][4], archivo[index2][5], archivo[index2][6], archivo[index2][8], archivo[index2][10], archivo[index2][9], archivo2[index][2]];
+                        comp[index] = [archivo[index2][0], archivo[index2][4], archivo[index2][5], archivo[index2][6], archivo2[index][1], archivo[index2][10], archivo[index2][9], archivo2[index][2]];
                     }
                 });
             });
-            archivo = [];
-            archivo2 = [];
+            comp = removeDuplicatesAndEmpty(comp);
         }
         else {
             alert("No se puede completar la comparación, revise los archivos");
         }
+        delete archivo;
+        delete archivo2;
         resolve();
     });
 }
@@ -148,13 +160,13 @@ async function addData() {
         let table = document.getElementById("tableBody");
         comp.map((filas, index) => {
             let row = table.insertRow();
-            filas.map((columnas, index2) => {
+            for (let i = 0; i < 8; i++) {
                 let cell = row.insertCell();
-                cell.innerHTML = comp[index][index2];
-            });
+                cell.innerHTML = comp[index][i];
+            }
         });
+        delete comp;
         document.getElementById("resultados").style.display = "inline";
-        comp = [];
         resolve();
     });
 }
@@ -184,7 +196,7 @@ function downloadList() {
         // Get the last 2 characters of the actual year.
         let year = new Date().getFullYear().toString().substr(-2);
         //Get the month in 2 digits.
-        let month = ("0" + (new Date().getMonth() + 1)).slice(-2);
+        let month = ("0" + (new Date().getMonth() + 1)).slice(-2) - 1;
         link.setAttribute("download", "revAtt" + year + month + ".txt");
         document.body.appendChild(link);
         link.click();
