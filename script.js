@@ -139,8 +139,8 @@ async function comparacion() {
                     }
                 });
             });
-            archivo = [];
-            archivo2 = [];
+            delete archivo;
+            delete archivo2;
         }
         else {
             alert("No se puede completar la comparación, revise los archivos");
@@ -165,6 +165,7 @@ async function addData() {
                 cell.innerHTML = comp[index][i];
             }
         });
+        delete comp;
         document.getElementById("resultados").style.display = "inline";
         resolve();
     });
