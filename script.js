@@ -139,13 +139,12 @@ async function comparacion() {
                     }
                 });
             });
-            comp = removeDuplicatesAndEmpty(comp);
+            archivo = [];
+            archivo2 = [];
         }
         else {
             alert("No se puede completar la comparación, revise los archivos");
         }
-        delete archivo;
-        delete archivo2;
         resolve();
     });
 }
@@ -158,6 +157,7 @@ async function addData() {
     return new Promise((resolve, reject) => {
         console.log("Agregando datos a la tabla...");
         let table = document.getElementById("tableBody");
+        let compLenght = comp.length;
         comp.map((filas, index) => {
             let row = table.insertRow();
             for (let i = 0; i < 8; i++) {
@@ -165,7 +165,6 @@ async function addData() {
                 cell.innerHTML = comp[index][i];
             }
         });
-        delete comp;
         document.getElementById("resultados").style.display = "inline";
         resolve();
     });
