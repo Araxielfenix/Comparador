@@ -3,10 +3,10 @@ import solidPlugin from 'vite-plugin-solid';
 
 export default defineConfig({
   plugins: [solidPlugin()],
-  base: 'https://araxielfenix.github.io/Comparador-Solid/#',
   server: {
     port: 3000,
   },
+  base: 'https://araxielfenix.github.io/Comparador-Solid/',
   build: {
     target: 'esnext',
   },
