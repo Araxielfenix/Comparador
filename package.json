@@ -1,10 +1,13 @@
 {
+  "homepage": "https://araxielfenix.github.io/Comparador-Solid/#",
   "name": "vite-template-solid",
   "version": "0.0.0",
   "description": "",
   "scripts": {
     "start": "vite",
     "dev": "vite",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "build": "vite build",
     "serve": "vite preview"
   },

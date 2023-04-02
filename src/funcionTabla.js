@@ -19,7 +19,6 @@ export async function addData() {
         });
         document.getElementById("descargarButton").classList.remove("hidden");
         document.getElementById("descargarButton").classList.add("grid");
-        delete {comp};
         resolve();
     });
 }
