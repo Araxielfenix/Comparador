@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  base: 'https://araxielfenix.github.io/Comparador-Solid/',
+  base: 'https://araxielfenix.github.io/Comparador/',
   build: {
     target: 'esnext',
   },
