@@ -16,6 +16,7 @@ El proyecto está diseñado para leer dos archivos y compararlos entre sí. Uno 
 
 ## Usage/Examples
 
+- Entra a https://araxielfenix.github.io/Comparador/
 - La comparación puede tardar unos segundos en completarse.
 - El archivo de registro de llamadas de telefónica debe tener el siguiente formato: fecha, hora, número de teléfono, duración de la llamada, costo de la llamada, etc.
 - El archivo complementario de BBVA debe tener el siguiente formato: fecha, hora, número de teléfono, importe, etc.
