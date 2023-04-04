@@ -1,8 +1,6 @@
 import { archivoLog, archivoDiff } from './obtenerArchivos.js';
-import { createContext, createSignal } from "solid-js";
-import {addData} from "./funcionTabla.js";
+import { addData } from "./funcionTabla.js";
 
-export const [globalState, setGlobalState] = createSignal({});
 export var comp = [];
 
 export async function loading() {
@@ -11,9 +9,17 @@ export async function loading() {
     document.getElementById("compararButton").classList.add("hidden");
     //Espera 5 segundos antes de ejecutar la funcion comparacion para que se vea el progreso de la barra.
     await new Promise(r => setTimeout(r, 250));
+    // Quiero agregar 4 filas vacias al <tbody> de la tabla para agregar una animacion de carga, y luego eliminarlas, el id de la tabla es "result" y el id del <tbody> es "tableBody".
+    for (let i = 0; i < 4; i++) {
+        document.getElementById("tableBody").innerHTML += "<tr class='border divide-x-2 divide-white-700 whitespace-nowrap px-4 py-2 text-gray-700 dark:text-white odd:bg-sky-900 h-2 bg-slate-200 dark:bg-slate-700 rounded'><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
+    }
+    document.getElementById("tableBody").classList.add("animate-pulse");
+    await new Promise(r => setTimeout(r, 250));
     await comparacion();
     console.log("Comparación completada");
+    document.getElementById("tableBody").innerHTML = "";
     await addData();
+    document.getElementById("tableBody").classList.remove("animate-pulse");
     document.getElementById("loadingAnimation").classList.add("hidden");
     document.getElementById("compararButton").classList.remove("hidden");
     document.body.style.cursor = "default";

@@ -15,7 +15,7 @@ export async function getFile(archivo) {
         let reader = new FileReader();
         reader.readAsText(file, "UTF-8");
         reader.onload = function (evt) {
-            let fileSplit= evt.target.result.split("\t");
+            let fileSplit = evt.target.result.split("\t");
             fileSplit = fileSplit.toString().split("\n");
             fileSplit = fileSplit.toString().split("\r");
             fileSplit = fileSplit.toString().split(",");
@@ -23,7 +23,7 @@ export async function getFile(archivo) {
                 return el != "";
             });
             let fileSplitLength = fileSplit.length;
-            if(archivo.target.id == "file-upload1"){
+            if (fileSplit[0].charAt(0) != "H") {
                 document.getElementById("fileLabel1").innerHTML = file.name;
                 for (let i = 0; i < fileSplitLength; i++) {
                     archivoLog[i] = [];
@@ -33,7 +33,7 @@ export async function getFile(archivo) {
                     i += 11;
                 }
             }
-            else{
+            else {
                 document.getElementById("fileLabel2").innerHTML = file.name;
                 for (let i = 0; i < fileSplitLength; i++) {
                     archivoDiff[i] = [];
