@@ -13,13 +13,13 @@ export async function loading() {
     for (let i = 0; i < 4; i++) {
         document.getElementById("tableBody").innerHTML += "<tr class='border divide-x-2 divide-white-700 whitespace-nowrap px-4 py-2 text-gray-700 dark:text-white odd:bg-sky-900 h-2 bg-slate-200 dark:bg-slate-700 rounded'><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
     }
-    document.getElementById("tableBody").classList.add("animate-pulse");
+    document.getElementById("resultados").classList.add("animate-pulse");
     await new Promise(r => setTimeout(r, 250));
     await comparacion();
     console.log("Comparación completada");
     document.getElementById("tableBody").innerHTML = "";
     await addData();
-    document.getElementById("tableBody").classList.remove("animate-pulse");
+    document.getElementById("resultados").classList.remove("animate-pulse");
     document.getElementById("loadingAnimation").classList.add("hidden");
     document.getElementById("compararButton").classList.remove("hidden");
     document.body.style.cursor = "default";

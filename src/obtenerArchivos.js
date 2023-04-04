@@ -7,13 +7,14 @@ export var archivoDiff = [];
 
 export async function getFile(archivo) {
     document.body.style.cursor = "progress";
+    document.getElementById("botones").classList.add("animate-pulse");
     document.getElementById("loadingAnimation").classList.remove("hidden");
     document.getElementById("compararButton").classList.add("hidden");
     await new Promise(r => setTimeout(r, 200));
-    let file = archivo.target.files[0];
-    if (file) {
+    if (archivo.target.files[0]) {
+        document.getElementById("fileLabel" + archivo.target.id.charAt(11)).innerHTML = archivo.target.files[0].name;
         let reader = new FileReader();
-        reader.readAsText(file, "UTF-8");
+        reader.readAsText(archivo.target.files[0], "UTF-8");
         reader.onload = function (evt) {
             let fileSplit = evt.target.result.split("\t");
             fileSplit = fileSplit.toString().split("\n");
@@ -24,7 +25,6 @@ export async function getFile(archivo) {
             });
             let fileSplitLength = fileSplit.length;
             if (fileSplit[0].charAt(0) != "H") {
-                document.getElementById("fileLabel1").innerHTML = file.name;
                 for (let i = 0; i < fileSplitLength; i++) {
                     archivoLog[i] = [];
                     for (let j = 0; j < 12; j++) {
@@ -34,7 +34,6 @@ export async function getFile(archivo) {
                 }
             }
             else {
-                document.getElementById("fileLabel2").innerHTML = file.name;
                 for (let i = 0; i < fileSplitLength; i++) {
                     archivoDiff[i] = [];
                     for (let j = 0; j < 5; j++) {
@@ -48,6 +47,8 @@ export async function getFile(archivo) {
             alert("No se pudo leer el archivo Log");
         }
     }
+    await new Promise(r => setTimeout(r, 250));
+    document.getElementById("botones").classList.remove("animate-pulse");
     document.getElementById("loadingAnimation").classList.add("hidden");
     document.getElementById("compararButton").classList.remove("hidden");
     document.body.style.cursor = "default";
