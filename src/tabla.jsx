@@ -1,10 +1,10 @@
 
 const datosTabla = () => {
     return (
-        <div id="resultados" class="max-h-screen rounded-lg border w-fit mx-auto border-slate-800 dark:border-slate-50">
+        <div id="resultados" class="rounded-lg border w-fit mx-auto border-slate-800 dark:border-slate-50">
             <table id="result"
                 class="border-spacing-px border-slate-500 divide-y-2 divide-gray-200 text-sm text-center dark:divide-gray-700">
-                <thead class="">
+                <thead>
                     <tr>
                         <th class="border whitespace-nowrap px-4 py-2 text-gray-700 dark:text-white">Tarjeta</th>
                         <th class="border whitespace-nowrap px-4 py-2 text-gray-700 dark:text-white">Fecha</th>
@@ -16,7 +16,7 @@ const datosTabla = () => {
                         <th class="border whitespace-nowrap px-4 py-2 text-gray-700 dark:text-white">Telefono</th>
                     </tr>
                 </thead>
-                <tbody id="tableBody" class=""></tbody>
+                <tbody id="tableBody"></tbody>
             </table>
         </div>
     );
