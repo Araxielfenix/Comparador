@@ -12,7 +12,7 @@ const Archivos = () => {
                             stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </span>
-                <label id="fileLabel1" for="diffFile" class="text-sm font-medium transition-all group-hover:ml-4 group-hover:hidden">
+                <label id="fileLabel1" for="diffFile" class="text-sm font-medium transition-all group-hover:ml-4 group-hover:hidden select-none">
                     Subir log
                 </label>
                 <input id="file-upload1" type="file" onchange={getFile} class='hidden transition-transform group-hover:translate-x-4 group-hover:inline-block'/>
@@ -26,7 +26,7 @@ const Archivos = () => {
                             stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </span>
-                <label id="fileLabel2" for="diffFile" class="text-sm font-medium transition-all group-hover:ml-4 group-hover:hidden pointer-events-none">
+                <label id="fileLabel2" for="diffFile" class="text-sm font-medium transition-all group-hover:ml-4 group-hover:hidden pointer-events-none select-none">
                     Subir complemento
                 </label>
                 <input id="file-upload2" type="file" onchange={getFile} class='hidden transition-transform group-hover:translate-x-4 group-hover:inline-block'/>
