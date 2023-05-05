@@ -9,12 +9,12 @@ const Nav = () => {
 							href="https://github.com/AraxielFenix"
 						>
 							<img
-								class="h-12 rounded-full border-2 border-indigo-600 hover:border-indigo-500 hover:scale-90 transform transition duration-500 ease-in-out z-40 hover:outline-none"
+								class="h-12 rounded-full border-2 border-indigo-600 hover:border-indigo-500 hover:scale-90 transform transition duration-500 ease-in-out z-40 hover:outline-none select-none"
 								src="https://static-cdn.jtvnw.net/jtv_user_pictures/6f424ca8-2f68-43c6-b021-a3134ace9225-profile_image-70x70.png"
 								alt="AraxielFenix"
 							/>
 							<label
-								class="text-gray-700 text-sm font-bold mb-2 md:mb-1 pr-3 group-hover:translate-x-1 -translate-x-full transition-transform z-10 cursor-pointer dark:text-white hover:outline-none"
+								class="text-gray-700 text-sm font-bold mb-2 md:mb-1 pr-3 group-hover:translate-x-1 -translate-x-full transition-transform z-10 cursor-pointer dark:text-white hover:outline-none select-none"
 								for="inline-full-name"
 							>
 								Araxiel Fenix{" "}
@@ -25,7 +25,7 @@ const Nav = () => {
 						<button
 							id="dropdownDefaultButton"
 							data-dropdown-toggle="dropdown"
-							class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+							class="text-white select-non bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
 							type="button"
 						>
 							Herramientas{" "}
@@ -56,7 +56,7 @@ const Nav = () => {
 								<li>
 									<a
 										href="https://araxielfenix.github.io/Analizador/"
-										class="block px-4 py-2 hover:bg-indigo-600 dark:hover:bg-indigo-600 dark:hover:text-white"
+										class="block select-none px-4 py-2 hover:bg-indigo-600 dark:hover:bg-indigo-600 dark:hover:text-white"
 									>
 										Analizador
 									</a>
@@ -64,7 +64,7 @@ const Nav = () => {
 								<li>
 									<a
 										href="https://araxielfenix.github.io/Formateador-ISO8583/"
-										class="block px-4 py-2 hover:bg-indigo-600 dark:hover:text-white"
+										class="block select-none px-4 py-2 hover:bg-indigo-600 dark:hover:text-white"
 									>
 										Formateador
 									</a>
