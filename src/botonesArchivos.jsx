@@ -15,7 +15,7 @@ const Archivos = () => {
                 <label id="fileLabel1" for="diffFile" class="text-sm font-medium transition-all group-hover:ml-4 group-hover:hidden select-none">
                     Subir log
                 </label>
-                <input id="file-upload1" type="file" onchange={getFile} class='hidden transition-transform group-hover:translate-x-4 group-hover:inline-block'/>
+                <input id="file-upload1" type="file" onchange={getFile} class='hidden transition-transform group-hover:translate-x-4 group-hover:inline-block select-none'/>
             </div>
             <div
                 class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500">
@@ -29,7 +29,7 @@ const Archivos = () => {
                 <label id="fileLabel2" for="diffFile" class="text-sm font-medium transition-all group-hover:ml-4 group-hover:hidden pointer-events-none select-none">
                     Subir complemento
                 </label>
-                <input id="file-upload2" type="file" onchange={getFile} class='hidden transition-transform group-hover:translate-x-4 group-hover:inline-block'/>
+                <input id="file-upload2" type="file" onchange={getFile} class='hidden transition-transform group-hover:translate-x-4 group-hover:inline-block select-none'/>
             </div>
         </div>
     );
